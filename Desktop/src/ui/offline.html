@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vestibuline - Offline</title>
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    /* Fonte Apple-style */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    /* Animações personalizadas */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.97);
+        filter: blur(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      25% {
+        transform: translateY(-15px) rotate(2deg);
+      }
+      50% {
+        transform: translateY(-8px) rotate(0deg);
+      }
+      75% {
+        transform: translateY(-15px) rotate(-2deg);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 0.6;
+      }
+      50% {
+        opacity: 0.9;
+      }
+    }
+
+    @keyframes spin-slow {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .animate-float {
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .animate-pulse-slow {
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    .animate-spin-slow {
+      animation: spin-slow 20s linear infinite;
+    }
+
+    /* Delay progressivo para animações */
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+    .delay-500 { animation-delay: 0.5s; }
+
+    /* Efeito glassmorphism sutil */
+    .glass-effect {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    /* Gradientes personalizados */
+    .gradient-purple {
+      background: linear-gradient(135deg, #7431f6 0%, #5e27c9 100%);
+    }
+
+    /* Inicialmente escondido para animação */
+    .fade-item {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-center items-center bg-[#f5f5f7] overflow-hidden relative">
+  
+  <!-- Background decorativo - Estilo macOS -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <!-- Blob 1 - Superior Esquerdo -->
+    <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px] animate-pulse-slow"></div>
+    
+    <!-- Blob 2 - Inferior Direito -->
+    <div class="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[120px] animate-pulse-slow" style="animation-delay: 2s;"></div>
+    
+    <!-- Círculo decorativo rotativo -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-purple-200/20 rounded-full animate-spin-slow"></div>
+  </div>
+
+  <!-- Container Principal -->
+  <div class="relative z-10 max-w-2xl mx-auto px-6 py-8">
+    
+    <!-- Mascote Flutuante (simulação com emoji/ícone) -->
+    <div class="flex justify-center mb-8 fade-item animate-fade-in-up delay-100">
+      <div class="relative w-32 h-32 md:w-40 md:h-40 animate-float">
+        <!-- Chameleon emoji como substituto do mascote -->
+        <div class="w-full h-full flex items-center justify-center text-8xl md:text-9xl drop-shadow-2xl">
+          <img src="../../public/Mascote/banners/Camaleão_10.png" alt="">
+        </div>
+        <!-- Anel decorativo -->
+        <div class="absolute inset-[-12px] border border-black/5 rounded-full"></div>
+      </div>
+    </div>
+
+    <!-- Card Principal - Estilo macOS -->
+    <div class="bg-white rounded-[28px] shadow-lg border border-black/5 p-8 sm:p-10 md:p-12 lg:p-16 text-center space-y-8 fade-item animate-fade-in-up delay-200">
+      <!-- Título -->
+      <div class="space-y-3 fade-item animate-fade-in-up delay-400">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold text-[#1d1d1f] tracking-tight">
+          Ops! Sem Conexão
+        </h1>
+        <div class="h-1 w-24 mx-auto rounded-full gradient-purple opacity-60"></div>
+      </div>
+
+      <!-- Descrição -->
+      <p class="text-lg md:text-xl text-gray-600 leading-relaxed max-w-md mx-auto fade-item animate-fade-in-up delay-500">
+        Parece que o sinal não chegou por aqui. Verifique sua conexão com a internet para continuar seus estudos.
+      </p>
+
+      <!-- Botão de Ação -->
+      <div class="pt-4 fade-item animate-fade-in-up delay-500">
+        <button 
+          onclick="tryAgain()" 
+          class="inline-flex items-center gap-3 px-8 py-4 gradient-purple text-white text-lg font-semibold rounded-[16px] shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1 transition-all duration-300 group"
+        >
+          <svg class="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+          </svg>
+          Tentar Novamente
+        </button>
+      </div>
+
+      <!-- Dicas adicionais -->
+      <div class="pt-8 border-t border-gray-100 fade-item animate-fade-in-up delay-500">
+        <p class="text-sm text-gray-500 mb-4 font-medium">Enquanto isso, você pode:</p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <span class="px-4 py-2 bg-[#f5f5f7] text-gray-600 text-sm rounded-[12px] border border-gray-200/50">
+            ✓ Verificar seu Wi-Fi
+          </span>
+          <span class="px-4 py-2 bg-[#f5f5f7] text-gray-600 text-sm rounded-[12px] border border-gray-200/50">
+            ✓ Verificar seus dados móveis
+          </span>
+          <span class="px-4 py-2 bg-[#f5f5f7] text-gray-600 text-sm rounded-[12px] border border-gray-200/50">
+            ✓ Reiniciar o roteador
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Info -->
+    <div class="mt-8 text-center fade-item animate-fade-in-up delay-500">
+      <p class="text-sm text-gray-500">
+        <span class="font-semibold text-[#7431f6]">Vestibuline</span> · Seu parceiro nos estudos
+      </p>
+    </div>
+  </div>
+
+  <!-- Script para ativar animações após carregamento -->
+  <script>
+    // Detecta quando a página carrega e ativa as animações
+    window.addEventListener('load', function() {
+      // Remove a classe fade-item para iniciar animações
+      setTimeout(() => {
+        const items = document.querySelectorAll('.fade-item');
+        items.forEach(item => {
+          item.classList.remove('fade-item');
+        });
+      }, 100);
+    });
+
+    // Pega a URL de onde o usuário veio (passada pelo Electron)
+    const urlParams = new URLSearchParams(window.location.search);
+    const fromUrl = urlParams.get('from');
+
+    function tryAgain() {
+      if (fromUrl) {
+        window.location.href = fromUrl;
+      } else {
+        // Fallback para a home caso não exista o parâmetro
+        window.location.href = 'http://localhost:3000';
+      }
+    }
+
+    // Detecta quando volta online
+    window.addEventListener('online', function() {
+      const container = document.querySelector('.bg-white');
+      if (container) {
+        container.innerHTML = `
+          <div class="text-center space-y-6 py-8">
+            <div class="w-20 h-20 mx-auto rounded-[20px] bg-green-500 flex items-center justify-center shadow-lg">
+              <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+            <h2 class="text-3xl font-semibold text-[#1d1d1f]">Conexão Restaurada!</h2>
+            <p class="text-gray-600">Recarregando a página...</p>
+          </div>
+        `;
+      }
+      setTimeout(tryAgain, 1500);
+    });
+  </script>
+</body>
+</html>
