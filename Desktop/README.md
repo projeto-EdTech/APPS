@@ -73,7 +73,9 @@ Desktop/
 ### Distribuição (Instalador .exe)
 Para gerar o executável final com instalador NSIS:
 ```bash
-npm run build
+npm run build # para Windows
+npx electron-builder --mac # para MacOS
+npx electron-builder --linux # para Linux
 ```
 
 ---
