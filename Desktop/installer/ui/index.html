@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instalador Vestibuline</title>
+  <link rel="stylesheet" href="global.css">
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      overflow: hidden;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Janela Modern macOS -->
+  <div class="modern-window" style="width: 600px; min-height: 560px; display: flex; flex-direction: column;">
+    
+    <!-- Traffic Lights -->
+    <div class="window-controls no-select">
+      <div class="traffic-dot close" onclick="window.installerAPI?.closeApp()" title="Fechar"></div>
+      <div class="traffic-dot minimize" onclick="window.installerAPI?.minimizeApp()" title="Minimizar"></div>
+      <div class="traffic-dot maximize" onclick="window.installerAPI?.maximizeApp()" title="Zoom"></div>
+    </div>
+    
+    <!-- Content Area -->
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 56px 48px; text-align: center;">
+      
+      <!-- Mascote com Glow -->
+      <div class="animate-slide-1 no-select" style="margin-bottom: 36px; position: relative;">
+        <div class="float-animation" style="width: 160px; height: 160px; display: flex; align-items: center; justify-content: center; position: relative;">
+          <!-- Glow Effect -->
+          <div style="position: absolute; inset: -20px; background: radial-gradient(circle, rgba(91, 143, 249, 0.15) 0%, transparent 70%); border-radius: 50%; filter: blur(24px);"></div>
+          <!-- Mascote -->
+          <img src="../public/Mascote/banners/Camaleão_3.png" alt="Mascote Vestibuline" style="width: 160px; height: 160px; object-fit: contain; filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.12)); position: relative; z-index: 1;">
+        </div>
+      </div>
+      
+      <!-- Título -->
+      <h1 id="title" class="display-large animate-slide-2 no-select" style="margin-bottom: 12px;">
+        Vestibuline
+      </h1>
+      
+      <!-- Subtítulo -->
+      <p class="body-emphasized animate-slide-3 no-select" style="margin-bottom: 48px; max-width: 420px;">
+        Transforme seus estudos com inteligência artificial e gamificação. Sua jornada rumo à aprovação começa aqui.
+      </p>
+      
+      <!-- Progress Section -->
+      <div id="progressSection" class="animate-slide-4" style="width: 100%; max-width: 400px; margin-bottom: 36px; opacity: 0; transition: opacity 0.35s ease;">
+        <div class="progress-track" style="margin-bottom: 16px;">
+          <div id="progressBar" class="progress-fill" style="width: 0%;"></div>
+        </div>
+        <p id="statusText" class="caption-regular" style="text-align: center; color: var(--label-secondary); font-size: 12px; font-weight: 500; letter-spacing: 0.04em;"></p>
+      </div>
+      
+      <!-- Botão Principal -->
+      <button id="installBtn" class="prominent-button animate-slide-5 no-select" onclick="startInstallation()">
+        Instalar Vestibuline
+      </button>
+      
+    </div>
+    
+    <!-- Footer -->
+    <div class="modern-separator"></div>
+    <div class="caption-regular no-select" style="padding: 20px; text-align: center; color: var(--label-tertiary); font-size: 11px; font-weight: 500;">
+      vestibuline.com • Versão 1.0.0
+    </div>
+    
+  </div>
+
+  <script>
+    const progressBar = document.getElementById('progressBar');
+    const progressSection = document.getElementById('progressSection');
+    const statusText = document.getElementById('statusText');
+    const installBtn = document.getElementById('installBtn');
+    const title = document.getElementById('title');
+
+    // Mock API para desenvolvimento
+    if (!window.installerAPI) {
+      window.installerAPI = {
+        onProgress: (callback) => {
+          window._progressCallback = callback;
+        },
+        startInstall: async () => {
+          const steps = [
+            { progress: 10, status: 'Verificando compatibilidade...' },
+            { progress: 25, status: 'Baixando componentes principais...' },
+            { progress: 45, status: 'Instalando dependências...' },
+            { progress: 65, status: 'Configurando banco de dados...' },
+            { progress: 85, status: 'Otimizando recursos...' },
+            { progress: 95, status: 'Finalizando configuração...' },
+            { progress: 100, status: 'Instalação concluída com sucesso' }
+          ];
+          
+          for (const step of steps) {
+            await new Promise(resolve => setTimeout(resolve, 700));
+            if (window._progressCallback) {
+              window._progressCallback(step);
+            }
+          }
+          return { success: true };
+        },
+        closeApp: () => console.log('Fechar aplicação'),
+        minimizeApp: () => console.log('Minimizar aplicação'),
+        maximizeApp: () => console.log('Maximizar aplicação')
+      };
+    }
+
+    // Listener de progresso
+    window.installerAPI.onProgress((data) => {
+      progressBar.style.width = data.progress + '%';
+      statusText.textContent = data.status.toUpperCase();
+      
+      if (data.progress === 100) {
+        setTimeout(() => {
+          title.textContent = 'Instalação Concluída! 🎉';
+          title.classList.add('success-animation');
+          installBtn.textContent = 'Abrir Vestibuline';
+          installBtn.disabled = false;
+          installBtn.style.opacity = '1';
+          installBtn.style.cursor = 'pointer';
+        }, 500);
+      }
+    });
+
+    // Função de instalação
+    async function startInstallation() {
+      if (installBtn.textContent === 'Abrir Vestibuline') {
+        alert('Aplicação seria aberta aqui!');
+        return;
+      }
+
+      // Desabilitar botão
+      installBtn.disabled = true;
+      installBtn.style.opacity = '0.6';
+      installBtn.style.cursor = 'not-allowed';
+      installBtn.textContent = 'Instalando...';
+      
+      // Mostrar progresso com animação suave
+      setTimeout(() => {
+        progressSection.style.opacity = '1';
+      }, 100);
+      
+      try {
+        const result = await window.installerAPI.startInstall();
+        if (!result.success) {
+          throw new Error(result.error || 'Erro desconhecido');
+        }
+      } catch (error) {
+        alert('Erro na instalação: ' + error.message);
+        installBtn.disabled = false;
+        installBtn.style.opacity = '1';
+        installBtn.style.cursor = 'pointer';
+        installBtn.textContent = 'Tentar Novamente';
+        progressSection.style.opacity = '0';
+        setTimeout(() => {
+          statusText.textContent = '';
+          progressBar.style.width = '0%';
+        }, 300);
+      }
+    }
+
+    // Prevenir arrastar a janela no content
+    document.querySelector('.modern-window').style.webkitAppRegion = 'drag';
+    document.querySelectorAll('button, .traffic-dot').forEach(el => {
+      el.style.webkitAppRegion = 'no-drag';
+    });
+  </script>
+
+</body>
+</html>

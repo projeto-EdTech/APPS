@@ -1,0 +1,283 @@
+/* 
+ * VESTIBULINE INSTALLER - macOS VENTURA/SONOMA DESIGN SYSTEM (2024)
+ * Design moderno, minimalista e sofisticado
+ */
+
+:root {
+  /* Cores SF Symbols Style */
+  --sf-blue: #0A84FF;
+  --sf-blue-vibrant: #0071E3;
+  --sf-tint: rgba(10, 132, 255, 0.85);
+  
+  /* Vestibuline Brand */
+  --vestibuline-start: #5B8FF9;
+  --vestibuline-end: #7B61FF;
+  
+  /* Sistema de Cinzas Moderno */
+  --system-fill: rgba(120, 120, 128, 0.16);
+  --system-fill-secondary: rgba(120, 120, 128, 0.08);
+  --separator: rgba(0, 0, 0, 0.1);
+  
+  /* Text Hierarchy */
+  --label-primary: rgba(0, 0, 0, 0.85);
+  --label-secondary: rgba(60, 60, 67, 0.6);
+  --label-tertiary: rgba(60, 60, 67, 0.3);
+}
+
+/* === RESET MODERNO === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-size: 15px;
+  line-height: 1.47059;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  color: var(--label-primary);
+}
+
+/* === JANELA MATERIALS (Vibrancy) === */
+.modern-window {
+  position: relative;
+  background: rgba(242, 242, 247, 0.72);
+  backdrop-filter: blur(64px) saturate(190%) brightness(1.05);
+  -webkit-backdrop-filter: blur(64px) saturate(190%) brightness(1.05);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 
+    0 0 0 0.5px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(255, 255, 255, 0.4) inset,
+    0 54px 55px rgba(0, 0, 0, 0.25),
+    0 -12px 30px rgba(0, 0, 0, 0.12) inset;
+  animation: modernAppear 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* === TRAFFIC LIGHTS VENTURA === */
+.window-controls {
+  display: flex;
+  gap: 8px;
+  padding: 20px 20px 0;
+  position: relative;
+  z-index: 100;
+}
+
+.traffic-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.12s cubic-bezier(0.25, 0.1, 0.25, 1);
+  position: relative;
+  border: 0.5px solid rgba(0, 0, 0, 0.02);
+}
+
+.traffic-dot::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.6) 0%, transparent 50%);
+  opacity: 0.8;
+}
+
+.traffic-dot.close { 
+  background: radial-gradient(circle at 40% 35%, #FF6159, #ED5451);
+}
+
+.traffic-dot.minimize { 
+  background: radial-gradient(circle at 40% 35%, #FFBD2E, #FFB524);
+}
+
+.traffic-dot.maximize { 
+  background: radial-gradient(circle at 40% 35%, #2AC940, #27CA3F);
+  opacity: 1;
+  cursor: pointer;
+}
+
+.traffic-dot:hover {
+  transform: scale(1.08);
+}
+
+.traffic-dot:active {
+  transform: scale(0.95);
+}
+
+/* === TIPOGRAFIA SF PRO === */
+.display-large {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.125;
+  letter-spacing: -0.005em;
+  color: var(--label-primary);
+}
+
+.body-emphasized {
+  font-size: 17px;
+  font-weight: 590;
+  line-height: 1.29412;
+  letter-spacing: -0.022em;
+  color: var(--label-secondary);
+}
+
+.caption-regular {
+  font-size: 11px;
+  font-weight: 590;
+  line-height: 1.27273;
+  letter-spacing: 0.066em;
+  text-transform: uppercase;
+  color: var(--label-tertiary);
+}
+
+/* === BOTÃO PROMINENT (iOS/macOS 16+) === */
+.prominent-button {
+  position: relative;
+  background: linear-gradient(180deg, var(--sf-blue) 0%, var(--sf-blue-vibrant) 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 11px 28px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  cursor: pointer;
+  box-shadow: 
+    0 0.5px 0.5px rgba(0, 0, 0, 0.08),
+    0 3px 6px rgba(0, 122, 255, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.18s cubic-bezier(0.25, 0.1, 0.25, 1);
+  overflow: hidden;
+}
+
+.prominent-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+  opacity: 1;
+  transition: opacity 0.18s ease;
+}
+
+.prominent-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.12),
+    0 6px 16px rgba(0, 122, 255, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.prominent-button:active:not(:disabled) {
+  transform: scale(0.98);
+  box-shadow: 
+    0 1px 1px rgba(0, 0, 0, 0.1),
+    0 2px 4px rgba(0, 122, 255, 0.2),
+    inset 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.prominent-button:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+/* === PROGRESS INDICATOR === */
+.progress-track {
+  height: 4px;
+  background: var(--system-fill-secondary);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--vestibuline-start), var(--vestibuline-end));
+  border-radius: 2px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 8px rgba(91, 143, 249, 0.35);
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, transparent 50%);
+  border-radius: 2px;
+}
+
+/* === ANIMAÇÕES MODERNAS === */
+@keyframes modernAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(16px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gentleFloat {
+  0%, 100% { 
+    transform: translateY(0) scale(1); 
+  }
+  50% { 
+    transform: translateY(-6px) scale(1.01); 
+  }
+}
+
+@keyframes successPulse {
+  0%, 100% { 
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% { 
+    transform: scale(1.03);
+    filter: brightness(1.08);
+  }
+}
+
+/* Classes de animação */
+.animate-slide-1 { animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.05s backwards; }
+.animate-slide-2 { animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards; }
+.animate-slide-3 { animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards; }
+.animate-slide-4 { animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards; }
+.animate-slide-5 { animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.25s backwards; }
+
+.float-animation { animation: gentleFloat 5s ease-in-out infinite; }
+.success-animation { animation: successPulse 0.6s ease-out; }
+
+/* === SEPARATOR === */
+.modern-separator {
+  height: 0.5px;
+  background: linear-gradient(90deg, transparent, var(--separator) 10%, var(--separator) 90%, transparent);
+}
+
+/* === UTILITÁRIOS === */
+.no-select {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.blur-background {
+  filter: blur(20px);
+  opacity: 0.6;
+}
