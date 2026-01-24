@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instalador Vestibuline - Step 3</title>
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="style/step3.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="relative">
+  
+  <!-- Janela Apple-like macOS -->
+  <div class="modern-window relative" style="width: 600px; height: 560px; display: flex; flex-direction: column; overflow: hidden; background: white; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12), 0 0 1px rgba(0, 0, 0, 0.05); border: none;">
+    
+    <!-- Traffic Lights - Apple Style -->
+    <div class="window-controls no-select relative z-50 flex items-center justify-between px-6 pt-5" style="flex-shrink: 0;">
+      <div class="flex gap-3 relative">
+        <div class="traffic-dot close group relative" onclick="window.installerAPI?.closeApp()" title="Fechar" style="position: relative;"></div>
+        <div class="traffic-dot minimize group relative" onclick="window.installerAPI?.minimizeApp()" title="Minimizar" style="position: relative;"></div>
+        <div class="traffic-dot maximize group relative" onclick="window.installerAPI?.maximizeApp()" title="Maximizar" style="position: relative;"></div>
+      </div>
+    </div>
+    
+    <!-- Content Area - Installation Progress -->
+    <div style="flex: 1; display: flex; flex-direction: column; padding: 24px 40px; overflow-y: auto; position: relative;">
+      
+      <!-- Título -->
+      <div class="fade-item animate-fade-in-up delay-100" style="flex-shrink: 0; margin-bottom: 8px;">
+        <h1 style="font-size: 18px; font-weight: 700; color: var(--apple-gray-dark); margin: 0; line-height: 1.2;">
+          Instalando Vestibuline
+        </h1>
+      </div>
+
+      <!-- Subtítulo -->
+      <div class="fade-item animate-fade-in-up delay-200" style="flex-shrink: 0; margin-bottom: 20px;">
+        <p style="font-size: 13px; color: var(--apple-gray-text); margin: 0; line-height: 1.5;" id="statusMessage">
+          Por favor, aguarde enquanto preparamos os arquivos...
+        </p>
+      </div>
+
+      <!-- Mascote Animation -->
+      <div class="fade-item animate-fade-in-up delay-200" style="margin: 0 auto 30px auto; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); width: 100%; max-width: 400px; background: #f5f5f7;">
+        <video autoplay loop muted playsinline style="width: 100%; height: auto; display: block;">
+            <source src="../public/Mascote/Animações/Camaleão_Animado_Digitando_no_Notebook.mp4" type="video/mp4">
+            Seu navegador não suporta a tag de vídeo.
+        </video>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="fade-item animate-fade-in-up delay-300 progress-container" style="flex-shrink: 0;">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Progress Percentage -->
+      <div class="fade-item animate-fade-in-up delay-300" style="flex-shrink: 0; text-align: center;">
+        <p style="font-size: 13px; color: var(--apple-gray-text); margin: 0;">
+          <span id="progressPercentage">0</span>%
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Fixed Footer -->
+    <div class="window-footer fade-item animate-fade-in-up delay-400" style="padding: 20px 30px; background: rgba(255,255,255,0.95); border-top: 1px solid #E8E8ED; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; backdrop-filter: blur(20px);">
+        <!-- Version Badge -->
+        <div class="version-badge" style="position: static; color: #86868B; font-size: 12px; font-weight: 500;">Vestibuline 1.0.0</div>
+        
+        <!-- Buttons -->
+        <div class="button-container" style="display: flex; gap: 12px; margin: 0;">
+            <button class="apple-button apple-button-secondary" onclick="goBack()" id="backButton" style="flex-shrink: 0; display: none;">
+            Voltar
+            </button>
+            <button class="apple-button apple-button-primary" onclick="finishInstallation()" id="finishButton" style="flex-shrink: 0; display: none;">
+            Concluir
+            </button>
+        </div>
+    </div>
+  </div>
+  <script src="script/step3.js"></script>
+</body>
+</html>

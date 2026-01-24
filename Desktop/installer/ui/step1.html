@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instalador Vestibuline - Step 1</title>
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="style/step1.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="relative">
+  <!-- Janela Apple-like macOS -->
+  <div class="modern-window relative" style="width: 600px; height: 560px; display: flex; flex-direction: column; overflow: hidden; background: white; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12), 0 0 1px rgba(0, 0, 0, 0.05); border: none;">
+    <!-- Traffic Lights - Apple Style -->
+    <div class="window-controls no-select relative z-50 flex items-center justify-between px-6 pt-5" style="flex-shrink: 0;">
+      <div class="flex gap-3 relative">
+        <div class="traffic-dot close group relative" onclick="window.installerAPI?.closeApp()" title="Fechar" style="position: relative;"></div>
+        <div class="traffic-dot minimize group relative" onclick="window.installerAPI?.minimizeApp()" title="Minimizar" style="position: relative;"></div>
+        <div class="traffic-dot maximize group relative" onclick="window.installerAPI?.maximizeApp()" title="Maximizar" style="position: relative;"></div>
+      </div>
+    </div>
+    
+    <!-- Content Area - Installation Options -->
+    <div style="flex: 1; display: flex; flex-direction: column; padding: 24px 40px; overflow-y: auto; position: relative;">
+      
+      <!-- Título -->
+      <div class="fade-item animate-fade-in-up delay-100" style="flex-shrink: 0; margin-bottom: 8px;">
+        <h1 style="font-size: 18px; font-weight: 700; color: var(--apple-gray-dark); margin: 0; line-height: 1.2;">
+          Escolha as Opções de Instalação
+        </h1>
+      </div>
+
+      <!-- Subtítulo -->
+      <div class="fade-item animate-fade-in-up delay-200" style="flex-shrink: 0; margin-bottom: 20px;">
+        <p style="font-size: 13px; color: var(--apple-gray-text); margin: 0; line-height: 1.5;">
+          Quem deve ter acesso a esta aplicação?
+        </p>
+      </div>
+
+      <!-- Descrição Adicional -->
+      <div class="fade-item animate-fade-in-up delay-300" style="flex-shrink: 0; margin-bottom: 16px; padding: 12px; background: var(--apple-gray-1); border-radius: 8px;">
+        <p style="font-size: 13px; color: var(--apple-gray-text); margin: 0; line-height: 1.5;">
+          Por favor, selecione se deseja tornar este software disponível para todos os usuários ou apenas para você.
+        </p>
+      </div>
+
+      <!-- Radio Options -->
+      <form style="flex: 1; display: flex; flex-direction: column; margin-bottom: 24px;">
+        
+        <!-- Opção 1: Todos os usuários -->
+        <label class="fade-item animate-fade-in-up delay-200 radio-container" style="flex-shrink: 0;">
+          <input type="radio" name="installType" value="all-users" id="allUsers">
+          <div class="radio-label">
+            <p class="radio-title">Todos os usuários do computador</p>
+            <p class="radio-description">Instalar para todos que usarem este computador</p>
+          </div>
+        </label>
+
+        <!-- Opção 2: Apenas para mim -->
+        <label class="fade-item animate-fade-in-up delay-300 radio-container" style="flex-shrink: 0;">
+          <input type="radio" name="installType" value="current-user" id="currentUser" checked>
+          <div class="radio-label">
+            <p class="radio-title" id="userOptionTitle">Apenas para mim</p>
+            <p class="radio-description">Instalação fresca apenas para o usuário atual</p>
+          </div>
+        </label>
+      </form>
+
+      <!-- Buttons -->
+      <div class="fade-item animate-fade-in-up delay-400 button-container" style="flex-shrink: 0;">
+        <button class="apple-button apple-button-secondary" onclick="goBack()" style="flex-shrink: 0;">
+          Voltar
+        </button>
+        <button class="apple-button apple-button-primary" onclick="nextStep()" style="flex-shrink: 0;">
+          Próximo
+        </button>
+      </div>
+
+      <!-- Version Badge -->
+      <div class="version-badge">Vestibuline 1.0.0</div>
+    </div>
+  </div>
+  <script src="script/step1.js"></script>
+</body>
+</html>
