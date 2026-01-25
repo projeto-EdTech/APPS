@@ -7,4 +7,7 @@ contextBridge.exposeInMainWorld("installerAPI", {
   closeApp: () => ipcRenderer.send("close-app"),
   minimizeApp: () => ipcRenderer.send("minimize-app"),
   maximizeApp: () => ipcRenderer.send("maximize-app"),
+  selectFolder: () => ipcRenderer.invoke("select-folder"),
+  startInstallation: (destinationPath) => ipcRenderer.invoke("start-installation", destinationPath),
+  getDiskSpace: (driveLetter) => ipcRenderer.invoke("get-disk-space", driveLetter),
 });

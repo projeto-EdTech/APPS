@@ -8,9 +8,9 @@
     "build": "electron-builder"
   },
   "dependencies": {
+    "adm-zip": "^0.5.10",
     "axios": "^1.6.2",
-    "fs-extra": "^11.2.0",
-    "adm-zip": "^0.5.10"
+    "fs-extra": "^11.2.0"
   },
   "devDependencies": {
     "electron": "^28.0.0",
